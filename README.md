@@ -1,6 +1,6 @@
 # Norwegian ML tagger
 
-The code requires pytorch GPU environment. It loads two models into the GPU RAM. Each of these models work well with 12 GB GPUS. But if you use them on the same GPU a minimum of 32 GB GPU is recommended. You edit tag.py and set int\_classification\_device int\_tokenization\_device to different device IDs (e.g. 0 and 1). If you want use CPU you should edit the code accordingly.
+The code requires pytorch GPU environment. It loads two models into the GPU RAM. Each of these models work well with 12 GB GPUS. But if you use them on the same GPU a minimum of 32 GB GPU is recommended. You can edit tag.py according to the GPU configuration and set int\_classification\_device int\_tokenization\_device to different device IDs (e.g. 0 and 1). If you want use CPU you should edit the code accordingly.
 
 The model files must be merged into one file using the following commands:
 
