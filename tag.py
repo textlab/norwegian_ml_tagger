@@ -13,26 +13,38 @@ from transformers import BertLMHeadModel
 from transformers import pipeline, AutoModelForTokenClassification, AutoTokenizer
 from functools import cmp_to_key
 
+
 os.environ["TOKENIZERS_PARALLELISM"]="false"
 enc_max_length=512
-int_classification_device=0
-int_tokenization_device=0
+int_classification_device=-1  # -1 for cpu or gpu id
+int_tokenization_device=-1    # -1 for cpu or gpu id 
+
 label_text_file = "data/label_list.txt"
 classes_file= "data/labels_classifier.txt"
 with open("data/labels_order.json","r") as f:
     label_order = json.load(f)
-classification_device="cuda:" + str(int_classification_device)
-tokenization_device="cuda:" + str(int_tokenization_device)
+
+if int_classification_device == -1:
+    classification_device="cpu"
+else:
+    classification_device="cuda:" + str(int_classification_device)
+
+if int_tokenization_device == -1:
+    tokenization_device="cpu"
+else:
+    tokenization_device="cuda:" + str(int_tokenization_device)
+
+
 tag_enc_tokenizer = BertTokenizerFast.from_pretrained('NbAiLab/nb-bert-base')
 
-torch.cuda.set_device(classification_device)
+#torch.cuda.set_device(classification_device)
 
 classification_model = AutoModelForTokenClassification.from_pretrained("./models/classifier/")
 classification_model.to(classification_device)
 classification_model.eval()
 #classifier_pipeline = pipeline('ner', model = classification_model, tokenizer = tag_enc_tokenizer, device = int_classification_device)
 
-torch.cuda.set_device(tokenization_device)
+#torch.cuda.set_device(tokenization_device)
 
 tokenization_model = AutoModelForTokenClassification.from_pretrained("./models/tokenization/")
 tokenization_model.to(tokenization_device)
@@ -136,7 +148,7 @@ def main():
         while line:
             line=line.strip()
             done+=line+"\n"
-            return_list.append(tag_sentence(line,10))
+            return_list.append(tag_sentence(line,1)[0][0])
             line=f.readline()
         f.close()
         print(json.dumps(return_list))
@@ -145,6 +157,6 @@ def main():
         eprint(e)
 
 if __name__ == "__main__":
-    #main()
-    print(tag_sentence("Dansk ungdom tyr i dag i større grad enn før til engelsk når de møter svensker og nordmenn.", 10)[0])
+    main()
+    #print(tag_sentence("Dansk ungdom tyr i dag i større grad enn før til engelsk når de møter svensker og nordmenn.", 10)[0][0])
 
