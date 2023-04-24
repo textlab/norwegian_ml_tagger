@@ -37,14 +37,9 @@ else:
 
 tag_enc_tokenizer = BertTokenizerFast.from_pretrained('NbAiLab/nb-bert-base')
 
-#torch.cuda.set_device(classification_device)
-
 classification_model = AutoModelForTokenClassification.from_pretrained("./models/classifier/")
 classification_model.to(classification_device)
 classification_model.eval()
-#classifier_pipeline = pipeline('ner', model = classification_model, tokenizer = tag_enc_tokenizer, device = int_classification_device)
-
-#torch.cuda.set_device(tokenization_device)
 
 tokenization_model = AutoModelForTokenClassification.from_pretrained("./models/tokenization/")
 tokenization_model.to(tokenization_device)
@@ -99,8 +94,6 @@ def get_classes(text, topmost=10):
     with torch.no_grad():
         logits = classification_model(**inputs).logits
         
-#    predictions = torch.argmax(logits, dim=2)
-    
     predictions=torch.topk(logits.flatten(start_dim=2, end_dim=2), topmost).indices
     predictions=torch.rot90(predictions[0],1,[0,1])
     predictions=torch.flip(predictions,[0])
@@ -111,12 +104,10 @@ def get_classes(text, topmost=10):
 def tag_sentence(text,topmost=10):
 
     global tokenization_pipeline
-#    global classifier_pipeline
     global labels
     
     classes=get_classes(text,topmost)
     token_merges = tokenization_pipeline(text, ignore_labels=[] )
-#    classes = classifier_pipeline(text, ignore_labels=[] )
 
     all_possibilities=[]
     for classs in classes:
@@ -139,7 +130,6 @@ def tag_sentence(text,topmost=10):
 
 
 def main():
-
     done=""
     try:
         f=open(sys.argv[1],"r")
@@ -158,5 +148,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    #print(tag_sentence("Dansk ungdom tyr i dag i større grad enn før til engelsk når de møter svensker og nordmenn.", 10)[0][0])
 
