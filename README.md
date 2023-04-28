@@ -14,3 +14,7 @@ The model files must be merged into one file using the following commands:
 You can use tag.py to tag sentences. Give a filename as parameter which has a sentence per line.
 
     python3 tag.py file_name
+
+# License
+
+[MIT license](https://github.com/textlab/norwegian_ml_tagger/blob/master/LICENSE)
