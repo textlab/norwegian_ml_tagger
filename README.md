@@ -15,6 +15,23 @@ You can use tag.py to tag sentences. Give a filename as parameter which has a se
 
     python3 tag.py file_name
 
+Cite this work as the following:
+
+    @inproceedings{haug-etal-2023-rules,
+        title = {Rules and neural nets for morphological tagging of {N}orwegian - Results and challenges},
+        author = {Haug, Dag  and
+          Yildirim, Ahmet  and
+          Hagen, Kristin  and
+          N{\o}klestad, Anders},
+        booktitle = {Proceedings of the 24th Nordic Conference on Computational Linguistics (NoDaLiDa)},
+        month = may,
+        year = {2023},
+        address = {T{\'o}rshavn, Faroe Islands},
+        publisher = {University of Tartu Library},
+        url = {https://aclanthology.org/2023.nodalida-1.43},
+        pages = {425--435}
+    }
+
 # License
 
 [MIT license](https://github.com/textlab/norwegian_ml_tagger/blob/master/LICENSE)
