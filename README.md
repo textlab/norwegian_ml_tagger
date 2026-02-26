@@ -1,5 +1,17 @@
 # Norwegian ML tagger
 
+[!CAUTION]
+**Important:** This repository is no longer maintained. The tagger is maintained under the HuggingFace repositories with four different sizes. Please refer to these repositories. The list of these repositories according to the size of models is given below:
+
+- [humit-tagger-xs (15M)](https://huggingface.co/Humit-Oslo/humit-tagger-xs)
+- [humit-tagger-small (40M)](https://huggingface.co/Humit-Oslo/humit-tagger-small)
+- [humit-tagger-base (123M)](https://huggingface.co/Humit-Oslo/humit-tagger-base)
+- [humit-tagger-large (323M)](https://huggingface.co/Humit-Oslo/humit-tagger-large)
+
+
+## The content of this page before moving to the new repositories.
+
+
 The code requires pytorch GPU environment. It loads two models into the GPU RAM. These models also work well with multiple 12 GB GPUs. If want to you use them on the same GPU a minimum of 32 GB RAM is recommended. You can edit tag.py according to the GPU configuration and set int\_classification\_device int\_tokenization\_device to different device IDs (e.g. 0,1,2... and -1 for cpu).
 
 The model files must be merged into one file using the following commands:
