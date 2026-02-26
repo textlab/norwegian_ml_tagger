@@ -1,6 +1,7 @@
 # Norwegian ML tagger
 
-[!CAUTION]
+> [!CAUTION]
+
 **Important:** This repository is no longer maintained. The tagger is maintained under the HuggingFace repositories with four different sizes. Please refer to these repositories. The list of these repositories according to the size of models is given below:
 
 - [humit-tagger-xs (15M)](https://huggingface.co/Humit-Oslo/humit-tagger-xs)
